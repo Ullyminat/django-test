@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Бронирование сеанса</h2>
+
+<div class="session-card">
+    <h3>{{ session.film.title }}</h3>
+    <p><strong>Время сеанса:</strong> {{ session.datetime }}</p>
+    <p><strong>Цена:</strong> {{ session.price }} руб.</p>
+    <p><strong>Свободных мест:</strong> {{ session.seats_available }}</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <p>Подтвердите бронирование:</p>
+    <button type="submit">Забронировать</button>
+    <a href="{% url 'sessions_list' %}">Отмена</a>
+</form>
+{% endblock %}

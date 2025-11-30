@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Сеансы</h2>
+
+<form method="get">
+    <input type="text" name="search" placeholder="Поиск фильма..." value="{{ search_query }}">
+    <button type="submit">Найти</button>
+</form>
+
+{% for session in page_obj %}
+<div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+    <h3>{{ session.film.title }}</h3>
+    <p>{{ session.film.description }}</p>
+    <p>Время: {{ session.datetime }}</p>
+    <p>Цена: {{ session.price }} руб.</p>
+    <p>Свободных мест: {{ session.seats_available }}</p>
+    <a href="{% url 'book_session' session.id %}">Забронировать</a>
+</div>
+{% endfor %}
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+    {% endif %}
+    
+    <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+    
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Вперед</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Кинотеатр</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .header { background: #333; color: white; padding: 10px; }
+        .nav a { color: white; margin: 0 10px; text-decoration: none; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav">
+            {% if user.is_authenticated %}
+                Привет, {{ user.username }}!
+                <a href="{% url 'sessions_list' %}">Сеансы</a>
+                <a href="{% url 'profile' %}">Мои записи</a>
+                {% if user.username == 'admin' %}
+                    <a href="{% url 'admin_panel' %}">Панель управления</a>
+                {% endif %}
+                <a href="{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a href="{% url 'login' %}">Войти</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+</body>
+</html>

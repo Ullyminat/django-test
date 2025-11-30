@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Добавление сеанса</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить сеанс</button>
+    <a href="{% url 'admin_panel' %}">Отмена</a>
+</form>
+{% endblock %}

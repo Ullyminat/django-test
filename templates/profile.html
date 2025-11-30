@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Мои записи на сеансы</h2>
+
+{% for booking in bookings %}
+<div class="session-card">
+    <h3>{{ booking.session.film.title }}</h3>
+    <p><strong>Время сеанса:</strong> {{ booking.session.datetime }}</p>
+    <p><strong>Количество билетов:</strong> {{ booking.tickets_count }}</p>
+    <p><strong>Дата бронирования:</strong> {{ booking.booking_date }}</p>
+</div>
+{% empty %}
+    <p>У вас нет записей на сеансы.</p>
+{% endfor %}
+{% endblock %}

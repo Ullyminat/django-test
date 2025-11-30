@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Удаление бронирования</h2>
+
+<div class="session-card">
+    <h3>{{ booking.session.film.title }}</h3>
+    <p><strong>Пользователь:</strong> {{ booking.user.username }}</p>
+    <p><strong>Время сеанса:</strong> {{ booking.session.datetime }}</p>
+    <p><strong>Количество билетов:</strong> {{ booking.tickets_count }}</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <p>Вы уверены, что хотите удалить это бронирование?</p>
+    <button type="submit" style="background: red;">Удалить</button>
+    <a href="{% url 'view_bookings' %}">Отмена</a>
+</form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Все бронирования</h2>
+
+{% for booking in bookings %}
+<div class="session-card">
+    <h3>{{ booking.session.film.title }}</h3>
+    <p><strong>Пользователь:</strong> {{ booking.user.username }}</p>
+    <p><strong>Время сеанса:</strong> {{ booking.session.datetime }}</p>
+    <p><strong>Количество билетов:</strong> {{ booking.tickets_count }}</p>
+    <p><strong>Дата бронирования:</strong> {{ booking.booking_date }}</p>
+    <a href="{% url 'delete_booking' booking.id %}">Удалить</a>
+</div>
+{% empty %}
+    <p>Бронирований нет.</p>
+{% endfor %}
+{% endblock %}
